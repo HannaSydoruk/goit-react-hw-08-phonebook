@@ -3,14 +3,19 @@ import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contacts/contactsSlice';
 import css from './ContactForm.module.css';
-import { selectContactsItems } from '../../redux/contacts/contactsSliceSelectors';
+import {
+  selectContactIsAdding,
+  selectContactsItems,
+} from '../../redux/contacts/contactsSliceSelectors';
+import { PulseLoader } from 'react-spinners';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const formKey = { name: setName, phone: setPhone };
+  const [number, setNumber] = useState('');
+  const formKey = { name: setName, number: setNumber };
   const dispatch = useDispatch();
   const contacts = useSelector(selectContactsItems);
+  const isContactAdding = useSelector(selectContactIsAdding);
 
   const onChangeHandler = e => {
     const { name, value } = e.currentTarget;
@@ -19,7 +24,7 @@ export const ContactForm = () => {
 
   const reset = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   const formSubmitHandler = e => {
@@ -34,7 +39,7 @@ export const ContactForm = () => {
     const contact = {
       id: nanoid(),
       name,
-      phone,
+      number,
     };
 
     const action = addContact(contact);
@@ -55,15 +60,20 @@ export const ContactForm = () => {
       />
       <input
         type="tel"
-        name="phone"
-        value={phone}
+        name="number"
+        value={number}
         onChange={onChangeHandler}
         placeholder="Phone"
         id={nanoid()}
         required
       />
-      <button type="submit" className={css['form-button']}>
+      <button
+        type="submit"
+        className={css['form-button']}
+        disabled={isContactAdding}
+      >
         Add contact
+        {isContactAdding && <PulseLoader color="#ffffff" size={3} />}
       </button>
     </form>
   );

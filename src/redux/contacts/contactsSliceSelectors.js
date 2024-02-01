@@ -12,6 +12,21 @@ export const selectContactsFilter = createSelector(
     store => store.filter
 )
 
+export const selectContactIsAdding = createSelector(
+    selectContacts,
+    store => store.isAddingContact
+)
+
+export const selectContactIsRemoving = createSelector(
+    selectContacts,
+    store => store.isRemovingContact
+)
+
+export const selectContactsIsLoading = createSelector(
+    selectContacts,
+    store => store.isLoading
+)
+
 export const selectFilteredContacts = createSelector(
     [selectContactsItems, selectContactsFilter],
     (contacts, filter) => {

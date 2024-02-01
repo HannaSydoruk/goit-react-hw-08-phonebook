@@ -6,6 +6,8 @@ const initialState = {
     items: [],
     filter: '',
     isLoading: false,
+    isAddingContact: false,
+    isRemovingContact: false
 }
 
 export const fetchAll = createAsyncThunk(
@@ -69,30 +71,30 @@ const contactsSlice = createSlice({
             })
 
             .addCase(deleteContact.pending, (state, _) => {
-                state.isLoading = true;
+                state.isRemovingContact = true;
                 state.error = null;
             })
             .addCase(deleteContact.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isRemovingContact = false;
                 state.items = state.items.filter(
                     contact => contact.id !== action.payload.id
                 )
             })
             .addCase(deleteContact.rejected, (state, action) => {
-                state.isLoading = false;
+                state.isRemovingContact = false;
                 state.error = action.payload;
             })
 
             .addCase(addContact.pending, (state, _) => {
-                state.isLoading = true;
+                state.isAddingContact = true;
                 state.error = null;
             })
             .addCase(addContact.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.isAddingContact = false;
                 state.items = [...state.items, action.payload];
             })
             .addCase(addContact.rejected, (state, action) => {
-                state.isLoading = false;
+                state.isAddingContact = false;
                 state.error = action.payload;
             })
 });
