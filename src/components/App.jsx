@@ -11,10 +11,11 @@ import { selectIsLoggedIn } from '../redux/auth/authSlice.selectors';
 import { apiRefreshUser } from '../redux/auth/authSlice';
 import RestrictedRoute from './RestrictedRoute/RestrictedRoute';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import { selectContactsIsLoading } from '../redux/contacts/contactsSliceSelectors';
 
 export const App = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-
+  const isLoading = useSelector(selectContactsIsLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -72,8 +72,7 @@ export const ContactForm = () => {
         className={css['form-button']}
         disabled={isContactAdding}
       >
-        Add contact
-        {isContactAdding && <PulseLoader color="#ffffff" size={3} />}
+        {isContactAdding ? <PulseLoader color="#ffffff" size={3} /> : <>✔</>}
       </button>
     </form>
   );
