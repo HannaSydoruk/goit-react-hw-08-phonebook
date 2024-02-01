@@ -1,9 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { apiLoginUser } from '../redux/auth/authSlice';
+import { selectIsLoading } from '../redux/auth/authSlice.selectors';
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
-
+  const isLoading = useSelector(selectIsLoading);
   const onSubmit = e => {
     e.preventDefault();
     const email = e.currentTarget.elements.userEmail.value;
@@ -40,7 +41,9 @@ export const LoginPage = () => {
             required
           />
         </label>
-        <button type="submit">Sign In</button>
+        <button type="submit" disabled={isLoading}>
+          Sign In
+        </button>
       </form>
     </div>
   );

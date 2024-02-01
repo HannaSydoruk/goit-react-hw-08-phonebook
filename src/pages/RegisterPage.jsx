@@ -1,8 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { apiRegisterUser } from '../redux/auth/authSlice';
+import { selectIsLoading } from '../redux/auth/authSlice.selectors';
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -52,7 +54,9 @@ export const RegisterPage = () => {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={isLoading}>
+          Sign Up
+        </button>
       </form>
     </div>
   );

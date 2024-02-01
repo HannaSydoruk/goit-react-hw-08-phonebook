@@ -13,7 +13,7 @@ export const fetchAll = createAsyncThunk(
     async (_, thunkApi) => {
         try {
             const contacts = await API.fetchContacts();
-            return contacts; // Action Payload
+            return contacts;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
         }
@@ -25,7 +25,7 @@ export const deleteContact = createAsyncThunk(
     async (contactId, thunkApi) => {
         try {
             const contacts = await API.deleteContact(contactId);
-            return contacts; // Action Payload
+            return contacts;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
         }
@@ -37,7 +37,7 @@ export const addContact = createAsyncThunk(
     async (contact, thunkApi) => {
         try {
             const newContact = await API.addContact(contact);
-            return newContact; // Action Payload
+            return newContact;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
         }
@@ -45,11 +45,9 @@ export const addContact = createAsyncThunk(
 );
 
 const contactsSlice = createSlice({
-    // Ім'я слайсу
     name: "contacts",
-    // Початковий стан редюсера слайсу
     initialState,
-    // Об'єкт редюсерів
+
     reducers: {
         setFilter(state, action) {
             state.filter = action.payload;
@@ -99,7 +97,7 @@ const contactsSlice = createSlice({
             })
 });
 
-// Генератори екшенів
+
 export const { setFilter } = contactsSlice.actions;
-// Редюсер слайсу
+
 export const contactsReducer = contactsSlice.reducer;
