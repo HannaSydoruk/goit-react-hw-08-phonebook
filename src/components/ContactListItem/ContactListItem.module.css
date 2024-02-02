@@ -8,9 +8,8 @@
 }
 
 .delete-btn:hover {
-  background-color: rgb(251, 253, 252);
+  background-color: transparent;
   color: rgb(39, 100, 79);
-  border: solid 1px rgb(39, 100, 79);
 }
 
 .contact-list {
@@ -25,15 +24,10 @@
   border-radius: 5px;
 }
 
-.contact-list:hover {
-  border: solid 1px rgb(39, 100, 79);
-}
-
 .phone {
   font-weight: normal;
   display: flex;
   gap: 10px;
-  /* justify-content: right; */
 }
 
 .name {

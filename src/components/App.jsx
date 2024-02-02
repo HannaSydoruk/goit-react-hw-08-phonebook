@@ -24,12 +24,11 @@ export const App = () => {
 
   return (
     <div>
-      <ToastContainer />
       <header>
         <Navigation />
         {isLoggedIn && <UserMenu />}
       </header>
-
+      <ToastContainer />
       <Suspense fallback={<p>Loading</p>}>
         <Routes>
           <Route path="/" element={<HomePage />} />

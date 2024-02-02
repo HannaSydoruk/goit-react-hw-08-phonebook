@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectContactIsRemoving } from '../../redux/contacts/contactsSliceSelectors';
 import { deleteContact } from '../../redux/contacts/contactsSlice';
 import { useState } from 'react';
+import { Bounce, toast } from 'react-toastify';
 
 export const ContactListItem = ({ contact }) => {
   const isRemovindContact = useSelector(selectContactIsRemoving);
@@ -19,7 +20,21 @@ export const ContactListItem = ({ contact }) => {
           className={css['delete-btn']}
           onClick={() => {
             setRemovingContactId(contact.id);
-            dispatch(deleteContact(contact.id));
+            dispatch(deleteContact(contact.id))
+              .unwrap()
+              .then(() => {
+                toast(`🦄 Contact ${contact.name} was removed`, {
+                  position: 'top-right',
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: 'light',
+                  transition: Bounce,
+                });
+              });
           }}
           disabled={isRemovindContact}
         >

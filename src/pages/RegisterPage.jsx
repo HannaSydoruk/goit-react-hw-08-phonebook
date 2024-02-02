@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { apiRegisterUser } from '../redux/auth/authSlice';
 import { selectIsLoading } from '../redux/auth/authSlice.selectors';
+import { Bounce, toast } from 'react-toastify';
+import css from './PagesStyles.module.css';
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -18,15 +20,43 @@ export const RegisterPage = () => {
       password,
     };
 
-    dispatch(apiRegisterUser(formData));
+    dispatch(apiRegisterUser(formData))
+      .unwrap()
+      .then(() => {
+        toast(`🦄 User ${name} registered`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
+      })
+      .catch(e => {
+        toast.error(`User ${name} registration failed: ${e}`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
+      });
   };
 
   return (
     <div>
-      <h1>RegisterPage</h1>
-      <form onSubmit={onSubmit}>
+      <h2>RegisterPage</h2>
+      <form onSubmit={onSubmit} className={css.form}>
         <label>
           Name:
+          <br />
           <input
             type="text"
             name="userName"
@@ -37,6 +67,7 @@ export const RegisterPage = () => {
         </label>
         <label>
           Email:
+          <br />
           <input
             type="email"
             name="userEmail"
@@ -46,6 +77,7 @@ export const RegisterPage = () => {
         </label>
         <label>
           Password:
+          <br />
           <input
             type="password"
             name="userPassword"

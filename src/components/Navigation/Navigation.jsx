@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { selectIsLoggedIn } from '../../redux/auth/authSlice.selectors';
+import css from './Navigation.module.css';
 
 const Navigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -9,14 +10,49 @@ const Navigation = () => {
     <div>
       {isLoggedIn ? (
         <>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/contacts">Contacts</NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${css.navLink} ${isActive ? css.active : ''}`
+            }
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${css.navLink} ${isActive ? css.active : ''}`
+            }
+            to="/contacts"
+          >
+            Contacts
+          </NavLink>
         </>
       ) : (
         <>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/register">Register</NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${css.navLink} ${isActive ? css.active : ''}`
+            }
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${css.navLink} ${isActive ? css.active : ''}`
+            }
+            to="/login"
+          >
+            Login
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${css.navLink} ${isActive ? css.active : ''}`
+            }
+            to="/register"
+          >
+            Register
+          </NavLink>
         </>
       )}
     </div>

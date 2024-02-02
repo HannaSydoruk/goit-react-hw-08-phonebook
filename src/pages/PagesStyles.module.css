@@ -1,31 +1,37 @@
-.form-input {
+.form {
   display: flex;
-  gap: 15px;
+  flex-direction: column;
+  gap: 20px;
 }
-.form-input input {
+
+.form label {
+  font-size: small;
+}
+.form input {
   background-color: rgb(251, 253, 252);
   border: solid 1px rgb(39, 100, 79);
   border-radius: 5px;
   width: 250px;
   height: 24px;
   padding-left: 10px;
+  color: rgb(39, 100, 79);
+  margin-top: 5px;
 }
 
-.form-input input:focus {
+.form input:focus {
   outline: none;
 }
 
-.form-button {
+.form button {
+  width: 100px;
+  height: 30px;
   background-color: rgb(39, 100, 79);
   border-radius: 5px;
   border: none;
   color: rgb(251, 253, 252);
   font-size: 12px;
-  width: 80px;
 }
 
-.form-button:hover,
-.form-button:focus,
-.form-button:active {
+.form button:hover {
   background-color: rgb(15, 83, 59);
 }

@@ -6,3 +6,7 @@
   height: 24px;
   padding-left: 10px;
 }
+
+.input-filter:focus {
+  outline: none;
+}

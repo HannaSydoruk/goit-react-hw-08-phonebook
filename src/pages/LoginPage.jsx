@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { apiLoginUser } from '../redux/auth/authSlice';
 import { selectIsLoading } from '../redux/auth/authSlice.selectors';
+import { Bounce, toast } from 'react-toastify';
+import css from './PagesStyles.module.css';
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -15,15 +17,30 @@ export const LoginPage = () => {
       password,
     };
 
-    dispatch(apiLoginUser(formData));
+    dispatch(apiLoginUser(formData))
+      .unwrap()
+      .catch(() => {
+        toast.error(`Wrong login or password`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
+      });
   };
 
   return (
     <div>
-      <h1>LoginPage</h1>
-      <form onSubmit={onSubmit}>
+      <h2>Enter you login and password</h2>
+      <form onSubmit={onSubmit} className={css.form}>
         <label>
           Email:
+          <br />
           <input
             type="email"
             name="userEmail"
@@ -33,6 +50,7 @@ export const LoginPage = () => {
         </label>
         <label>
           Password:
+          <br />
           <input
             type="password"
             name="userPassword"

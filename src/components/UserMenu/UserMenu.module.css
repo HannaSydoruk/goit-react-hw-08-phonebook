@@ -1,0 +1,24 @@
+.user {
+  display: inline-flex;
+  top: 40px;
+  right: 40px;
+  position: absolute;
+  gap: 10px;
+  color: rgb(39, 100, 79);
+  font-size: 12px;
+  align-items: center;
+}
+
+.user button {
+  background-color: rgb(39, 100, 79);
+  border: none;
+  border-radius: 5px;
+  color: azure;
+  font-size: 10px;
+  width: 50px;
+  height: 20px;
+}
+
+.user button:hover {
+  background-color: rgb(15, 83, 59);
+}

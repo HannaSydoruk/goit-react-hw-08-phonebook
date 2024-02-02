@@ -1,0 +1,21 @@
+.navLink {
+  display: inline-flex;
+  background-color: transparent;
+  text-decoration: none;
+  font-weight: 700;
+  color: rgb(39, 100, 79);
+  padding: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: 1px solid rgb(251, 253, 252);
+}
+
+.navLink:hover {
+  border: 1px solid rgb(39, 100, 79);
+}
+
+.active {
+  color: rgb(251, 253, 252);
+  background-color: rgb(39, 100, 79);
+  border: 1px solid rgb(39, 100, 79);
+}

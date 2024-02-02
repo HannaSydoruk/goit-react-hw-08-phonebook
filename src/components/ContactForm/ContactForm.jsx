@@ -34,13 +34,23 @@ export const ContactForm = () => {
       contact => contact.name.toLowerCase() === name.toLocaleLowerCase()
     );
     if (hasDuplicates) {
-      alert(`${name} is already in contacts!`);
+      toast(`🦄 ${name} is already in contacts!`, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+        transition: Bounce,
+      });
       return;
     }
     const contact = {
       id: nanoid(),
-      name,
-      number,
+      name: name,
+      number: number.trim(),
     };
 
     const action = addContact(contact);
@@ -58,8 +68,21 @@ export const ContactForm = () => {
           theme: 'light',
           transition: Bounce,
         });
+        reset();
+      })
+      .catch(e => {
+        toast.error(`Contact ${contact.name} was not added: ${e}`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
       });
-    reset();
   };
 
   return (

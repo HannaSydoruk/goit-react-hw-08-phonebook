@@ -5,6 +5,7 @@ import {
   selectUserData,
 } from '../../redux/auth/authSlice.selectors';
 import { apiLogoutUser } from '../../redux/auth/authSlice';
+import css from './UserMenu.module.css';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const UserMenu = () => {
   const handleLogout = () => dispatch(apiLogoutUser());
 
   return (
-    <div>
+    <div className={css.user}>
       <p>{userData.email}</p>
       <button onClick={handleLogout} disabled={isLoading} type="button">
         Logout
