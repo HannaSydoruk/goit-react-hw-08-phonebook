@@ -11,11 +11,11 @@ import { selectIsLoggedIn } from '../redux/auth/authSlice.selectors';
 import { apiRefreshUser } from '../redux/auth/authSlice';
 import RestrictedRoute from './RestrictedRoute/RestrictedRoute';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
-import { selectContactsIsLoading } from '../redux/contacts/contactsSliceSelectors';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isLoading = useSelector(selectContactsIsLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,6 +24,7 @@ export const App = () => {
 
   return (
     <div>
+      <ToastContainer />
       <header>
         <Navigation />
         {isLoggedIn && <UserMenu />}

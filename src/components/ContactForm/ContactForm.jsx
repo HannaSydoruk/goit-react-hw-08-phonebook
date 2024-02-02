@@ -8,6 +8,7 @@ import {
   selectContactsItems,
 } from '../../redux/contacts/contactsSliceSelectors';
 import { PulseLoader } from 'react-spinners';
+import { Bounce, toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -43,7 +44,21 @@ export const ContactForm = () => {
     };
 
     const action = addContact(contact);
-    dispatch(action);
+    dispatch(action)
+      .unwrap()
+      .then(() => {
+        toast(`🦄 Contact ${contact.name} was added`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
+      });
     reset();
   };
 
